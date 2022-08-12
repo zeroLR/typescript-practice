@@ -102,3 +102,25 @@ function printPersonInfo(person: Person) {
   console.log(`Age is: ${person.age}`);
   console.log(`Owns a pet? ${person.hasPet}`);
 }
+
+// Use object with literal
+printPersonInfo({
+  name: "Joseph",
+  age: 25,
+  hasPet: false,
+
+  job: "Front-End",
+  nothingSpecial: null,
+});
+
+// Object assigned to variable
+let infoJoseph = {
+  name: "Joseph",
+  age: 25,
+  hasPet: false,
+
+  job: "Front-End",
+  nothingSpecial: null,
+};
+
+printPersonInfo(infoJoseph);
