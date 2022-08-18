@@ -592,3 +592,69 @@ console.log(uniquePerson);
 console.log(uniquePerson.name);
 console.log(uniquePerson.age);
 console.log(uniquePerson.hasPet);
+
+/** Lazy Initialization in Singleton Pattern */
+class LazySingletonPerson {
+  private constructor(
+    public readonly name: string,
+    public readonly age: number,
+    public readonly hasPet: boolean
+  ) {}
+
+  private static Instance: LazySingletonPerson | null = null;
+
+  static getInstance(): LazySingletonPerson {
+    if (this.Instance === null) {
+      this.Instance = new LazySingletonPerson("Joseph", 20, false);
+    }
+
+    return this.Instance;
+  }
+}
+
+/** Type Inference in Class */
+enum Color {
+  White,
+  Black,
+  Brown,
+  Grey,
+  Rainbow,
+}
+
+class Horse {
+  constructor(
+    public name: string,
+    public color: Color,
+    public readonly type: string,
+    private noise: string = "MeeeeeeeeeeeeeeEeeee~"
+  ) {}
+
+  public makeNoise() {
+    console.log(this.noise);
+  }
+
+  public info() {
+    console.log(this.infoText);
+  }
+
+  private infoText(): string {
+    return `It is ${this.name} the ${Color[this.color]} ${this.type}`;
+  }
+}
+
+let myHorse = new Horse("Martin", Color.Black, "Pony");
+
+myHorse.color = "Red";
+
+myHorse.isNature = false;
+
+myHorse = null;
+
+myHorse = new Horse("Toby", Color.Brown, "Stallion");
+
+/** Type Annotation of Class */
+let certainlyAHorsie: Horse = new Horse("Leo", Color.Black, "Bronco");
+
+let certainlyAnotherHorsie = <Horse>new Horse("Wendy", Color.White, "Mustang");
+
+let certainlyTheOtherHorsie = new Horse("Alexius", Color.Grey, "Foal") as Horse;
