@@ -637,7 +637,7 @@ class Horse {
     console.log(this.infoText);
   }
 
-  private infoText(): string {
+  protected infoText(): string {
     return `It is ${this.name} the ${Color[this.color]} ${this.type}`;
   }
 }
@@ -658,3 +658,262 @@ let certainlyAHorsie: Horse = new Horse("Leo", Color.Black, "Bronco");
 let certainlyAnotherHorsie = <Horse>new Horse("Wendy", Color.White, "Mustang");
 
 let certainlyTheOtherHorsie = new Horse("Alexius", Color.Grey, "Foal") as Horse;
+
+/** Inheriance Class Example*/
+class Unicorn extends Horse {
+  constructor(name: string) {
+    super(name, Color.Rainbow, "Mystical Unicorn", "Nheeeeee~");
+  }
+
+  protected infoText(): string {
+    return `It's a mystical unicorn! Its name is ${this.name}!`;
+  }
+
+  public puke(): void {
+    console.log("Puking rainbow vomit!");
+  }
+}
+
+/** Inference after child class inheriance */
+let aRandomUnicorn = new Unicorn("Leo");
+
+// Annotation as Horse, but assigned to its child class
+let anotherHose: Horse = new Unicorn("Leo");
+
+aRandomUnicorn.puke();
+
+anotherHose.puke();
+
+let shouldBeUnicorn: Unicorn = new Horse(
+  "Leo",
+  Color.Rainbow,
+  "Mystical Unicorn",
+  "Nyeeeeeee~"
+);
+
+class Stallion extends Horse {
+  constructor(name: string) {
+    super(name, Color.Brown, "Stallion");
+  }
+}
+
+let shouldBeStallion: Stallion = new Horse("Leo", Color.Brown, "Stallion");
+
+class C1 {
+  constructor(public prop: string) {}
+
+  public publicMethod(): string {
+    return this.prop;
+  }
+}
+
+class C2 {
+  constructor(public prop: string) {}
+
+  public publicMethod(): string {
+    return this.prop;
+  }
+}
+
+let someObject: C1 = new C2("123");
+
+class AnotherC1 {
+  constructor(public prop: string, private privateProp: number) {}
+
+  public publicMethod(): number {
+    return this.privateProp;
+  }
+
+  private privateMethod(): number {
+    return this.privateProp;
+  }
+}
+
+class AnotherC2 {
+  constructor(public prop: string, private privateProp: number) {}
+
+  public publicMethod(): number {
+    return this.privateProp;
+  }
+
+  private privateMethod(): number {
+    return this.privateProp;
+  }
+}
+
+let otherObject: AnotherC1 = new AnotherC2("123", 123);
+
+type TA = { hello: string };
+type TB = { hello: string };
+
+interface IA {
+  hello: string;
+}
+
+interface IB {
+  hello: string;
+}
+
+function logTypeA(obj: TA) {
+  console.log(obj);
+}
+
+logTypeA(<TA>{ hello: "World" });
+logTypeA(<TB>{ hello: "World" });
+logTypeA(<IA>{ hello: "World" });
+logTypeA(<IB>{ hello: "World" });
+
+/** Type x Interface */
+enum Role {
+  Swordsman = "Swordsman",
+  Warlock = "Warlock",
+  Highwayman = "Highwayman",
+  BountyHunter = "Bounty Hunter",
+  Monster = "Monster",
+}
+
+interface ICharacter {
+  name: string;
+  role: Role;
+  attack(target: ICharacter): void;
+}
+
+interface IStats {
+  health: number;
+  mana: number;
+  strength: number;
+  defense: number;
+}
+
+// Implements character with interface
+class Character implements ICharacter, IStats {
+  //   public health: number = 50;
+  //   public mana: number = 10;
+  //   public strength: number = 10;
+  //   public defense: number = 5;
+  constructor(
+    public name: string,
+    public role: Role,
+    public health: number = 50,
+    public mana: number = 10,
+    public strength: number = 10,
+    public defense: number = 5
+  ) {}
+
+  public attack(target: ICharacter): void {
+    let verb: string;
+
+    switch (this.role) {
+      case Role.Swordsman:
+        verb = "attacking";
+        break;
+      case Role.Warlock:
+        verb = "cursing";
+        break;
+      case Role.Highwayman:
+        verb = "ambushing";
+        break;
+      case Role.BountyHunter:
+        verb = "threatening";
+        break;
+      default:
+        throw new Error(`${this.role} didn't exist!`);
+    }
+    console.log(`${this.name} is ${verb} ${target.name}!`);
+  }
+}
+
+class Monster implements ICharacter {
+  public role = Role.Monster;
+
+  constructor(public name: string) {}
+
+  public attack(target: ICharacter): void {
+    console.log(
+      `${this.name} is attacking the ${target.role} - ${target.name}`
+    );
+  }
+}
+
+const character1 = new Character("Joseph", Role.Swordsman, 100, 20, 15, 15);
+const character2 = new Character("Jack", Role.Highwayman, 80, 25, 10, 20);
+
+character1.attack(character2);
+character2.attack(character1);
+console.log(character1);
+console.log(character2);
+
+let certainlyACharacter: ICharacter = new Character("Joseph", Role.Highwayman);
+
+character1.name;
+character1.health;
+
+certainlyACharacter.name;
+certainlyACharacter.health;
+
+let aHumanCharacter = new Character("Joseph", Role.Swordsman);
+let aMonster = new Monster("Sticky Slime");
+
+aHumanCharacter.attack(aMonster);
+aMonster.attack(aHumanCharacter);
+
+class BountyHunter extends Character {
+  public hostages: ICharacter[] = [];
+
+  constructor(name: string) {
+    super(name, Role.BountyHunter);
+  }
+
+  public capture(target: ICharacter, successRate: number) {
+    const randomNumber = Math.random();
+    let message: string;
+    let targetTitle = `${target.name} the ${target.role}`;
+
+    if (randomNumber > 1 - successRate) {
+      this.hostages = [...this.hostages, target];
+
+      message = `${this.name} has captured ${targetTitle}`;
+    } else {
+      message = `${this.name} failed to capture ${targetTitle}`;
+    }
+
+    console.log(message);
+  }
+  public sellHostages() {
+    const totalPrice = this.hostages.length * 1000;
+    const hostagesInfo = this.hostages
+      .map((hostage) => `${hostage.name} the ${hostage.role}`)
+      .join("\n");
+
+    console.log(`${this.name} sells all the hostages, including: 
+      ${hostagesInfo}
+      
+      Recevie Gold: $${totalPrice}
+      `);
+
+    this.hostages = [];
+  }
+}
+
+const bountyHunter = new BountyHunter("Joseph");
+
+const wantedCharacter = new Character("Jack", Role.Highwayman);
+
+const wantedMonster = new Monster("Eikthyrnir");
+
+const desperado = new Character("Legendary Joe", Role.Highwayman);
+
+bountyHunter.capture(wantedCharacter, 1);
+
+bountyHunter.capture(wantedMonster, 0.5);
+
+bountyHunter.capture(desperado, 0.01);
+
+bountyHunter.sellHostages();
+
+wantedCharacter.attack(bountyHunter);
+wantedMonster.attack(bountyHunter);
+
+const anyCharacter: ICharacter = new BountyHunter("Alexius");
+
+anyCharacter.capture(wantedMonster, 0.5);
