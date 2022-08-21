@@ -140,7 +140,7 @@ interface TransactionSystem {
 }
 
 // define interface of ATM complete system
-interface ICashMachine extends TransactionSystem, AccountSystem {}
+interface ICashMachine extends TransactionSystem, AccountSystem { }
 
 // implement ICashMachine interface
 class CashMachine implements ICashMachine {
@@ -169,7 +169,7 @@ class CashMachine implements ICashMachine {
       { account: "Jack", password: "456", money: 77777 },
       { account: "Lin", password: "789", money: 6666666 },
     ]
-  ) {}
+  ) { }
 
   private currentUser: TUserAccount | undefined;
 
@@ -262,7 +262,7 @@ class TicketSystem {
     protected startingPoint: string,
     protected destination: string,
     private departureTime: Date
-  ) {}
+  ) { }
 
   // Caculate derive time
   protected deriveDuration(): TimeFormat {
@@ -418,7 +418,7 @@ trainTicket.getTicketInfo();
 /** How super works */
 // parent class
 class TestParentClass {
-  constructor(public p1: number, public p2: string, public p3: boolean) {}
+  constructor(public p1: number, public p2: string, public p3: boolean) { }
 }
 
 // correct case
@@ -432,7 +432,7 @@ const objFromChildClass1 = new TestChildClass1(123, "hello", true);
 console.log(objFromChildClass1);
 
 // wrong case
-class TestChildClass2 extends TestParentClass {}
+class TestChildClass2 extends TestParentClass { }
 
 const objFromChildClass2 = new TestChildClass2();
 console.log(objFromChildClass2);
@@ -444,7 +444,7 @@ class CircleGeometry {
   private PI: number = 3.14;
 
   // initial value: radius
-  constructor(public radius: number) {}
+  constructor(public radius: number) { }
 
   // calculate area of circle
   public area(): number {
@@ -505,7 +505,7 @@ class CircleGeometryV2 {
   static readonly staticPI: number = 3.14;
 
   // initial value: radius
-  constructor(public radius: number) {}
+  constructor(public radius: number) { }
 
   // use Getter Method
   get area() {
@@ -559,7 +559,7 @@ CircleGeometryV2.staticPI = 123;
 
 /** Private Constructor & Singleton Pattern */
 class ConstructIsForbidden {
-  private constructor() {}
+  private constructor() { }
 }
 
 let forbiddenObject = new ConstructIsForbidden();
@@ -572,7 +572,7 @@ class SingletonPerson {
     public readonly name: string,
     public readonly age: number,
     public readonly hasPet: boolean
-  ) {}
+  ) { }
 
   private static Instance: SingletonPerson = new SingletonPerson(
     "Joseph",
@@ -599,7 +599,7 @@ class LazySingletonPerson {
     public readonly name: string,
     public readonly age: number,
     public readonly hasPet: boolean
-  ) {}
+  ) { }
 
   private static Instance: LazySingletonPerson | null = null;
 
@@ -627,7 +627,7 @@ class Horse {
     public color: Color,
     public readonly type: string,
     private noise: string = "MeeeeeeeeeeeeeeEeeee~"
-  ) {}
+  ) { }
 
   public makeNoise() {
     console.log(this.noise);
@@ -700,7 +700,7 @@ class Stallion extends Horse {
 let shouldBeStallion: Stallion = new Horse("Leo", Color.Brown, "Stallion");
 
 class C1 {
-  constructor(public prop: string) {}
+  constructor(public prop: string) { }
 
   public publicMethod(): string {
     return this.prop;
@@ -708,7 +708,7 @@ class C1 {
 }
 
 class C2 {
-  constructor(public prop: string) {}
+  constructor(public prop: string) { }
 
   public publicMethod(): string {
     return this.prop;
@@ -718,7 +718,7 @@ class C2 {
 let someObject: C1 = new C2("123");
 
 class AnotherC1 {
-  constructor(public prop: string, private privateProp: number) {}
+  constructor(public prop: string, private privateProp: number) { }
 
   public publicMethod(): number {
     return this.privateProp;
@@ -730,7 +730,7 @@ class AnotherC1 {
 }
 
 class AnotherC2 {
-  constructor(public prop: string, private privateProp: number) {}
+  constructor(public prop: string, private privateProp: number) { }
 
   public publicMethod(): number {
     return this.privateProp;
@@ -798,7 +798,7 @@ class Character implements ICharacter, IStats {
     public mana: number = 10,
     public strength: number = 10,
     public defense: number = 5
-  ) {}
+  ) { }
 
   public attack(target: ICharacter): void {
     let verb: string;
@@ -826,7 +826,7 @@ class Character implements ICharacter, IStats {
 class Monster implements ICharacter {
   public role = Role.Monster;
 
-  constructor(public name: string) {}
+  constructor(public name: string) { }
 
   public attack(target: ICharacter): void {
     console.log(
