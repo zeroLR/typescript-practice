@@ -1,0 +1,18 @@
+{
+  "name": "strategy_pattern_self_practice",
+  "version": "1.0.0",
+  "description": "reference: https://ithelp.ithome.com.tw/articles/10220356",
+  "main": "index.js",
+  "scripts": {
+    "start:wathc":"tsc -w",
+    "start:run": "nodemon build/index.js",
+    "start":"concurrently npm:start:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19"
+  }
+}
