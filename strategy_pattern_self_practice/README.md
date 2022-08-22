@@ -23,7 +23,7 @@ reference: https://ithelp.ithome.com.tw/articles/10220356
 - BasicDagger
 - BasicAxe
 
-### 技能(Abilities)
+### 攻擊技能(Attack)
 
 - LightMeleeAttack
 - HeavyMeleeAttack
