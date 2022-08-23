@@ -1,12 +1,12 @@
 {
-  "name": "strategy_pattern_self_practice",
+  "name": "factory_method_self_practice",
   "version": "1.0.0",
-  "description": "reference: https://ithelp.ithome.com.tw/articles/10220356",
+  "description": "reference: https://ithelp.ithome.com.tw/articles/10221353",
   "main": "index.js",
   "scripts": {
-    "start:watch":"tsc -w",
+    "start:watch": "tsc -w",
     "start:run": "nodemon build/index.js",
-    "start":"concurrently npm:start:*"
+    "start": "concurrently npm:start:*"
   },
   "keywords": [],
   "author": "",
