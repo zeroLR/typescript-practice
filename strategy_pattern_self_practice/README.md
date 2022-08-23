@@ -30,3 +30,5 @@ reference: https://ithelp.ithome.com.tw/articles/10220356
 - MagicAttack
 
 ### UML
+
+![](https://raw.githubusercontent.com/zeroLR/typescript-practice/master/strategy_pattern_self_practice/UML/simpleRPG.png)
